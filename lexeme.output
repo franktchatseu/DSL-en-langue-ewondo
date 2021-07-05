@@ -1,0 +1,359 @@
+Terminaux inutilisés dans la grammaire
+
+    IDFONCTION
+    FAIRE
+    FAIT
+    BOUCLE
+    COND
+    SEPVAR
+    SYMBOLE
+    TYPE
+
+
+État 19 conflits: 1 décalage/réduction
+
+
+Grammaire
+
+    0 $accept: prog $end
+
+    1 prog: DEBUTPROGRAMME corps FINPROGRAMME
+
+    2 corps: expr corps
+    3      | expr
+
+    4 expr: binst
+    5     | binstsi
+
+    6 binst: DA SEPINSTR
+    7      | DA SEPINSTR binst
+
+    8 DA: VARIABLE
+    9   | VARIABLE AFFECTATION SECONDMEMBRE
+
+   10 SECONDMEMBRE: TERME
+   11             | TERME OPERATEUR SECONDMEMBRE
+
+   12 TERME: VARIABLE
+   13      | NOMBRE
+
+   14 binstsi: SI CONDITION ALORS expr FSI
+
+   15 CONDITION: SECONDMEMBRE COMPARAISON SECONDMEMBRE
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+    $end (0) 0
+    error (256)
+    DEBUTPROGRAMME (258) 1
+    FINPROGRAMME (259) 1
+    NOMBRE (260) 13
+    OPERATEUR (261) 11
+    VARIABLE (262) 8 9 12
+    IDFONCTION (263)
+    FAIRE (264)
+    FAIT (265)
+    ALORS (266) 14
+    BOUCLE (267)
+    COND (268)
+    SEPVAR (269)
+    SEPINSTR (270) 6 7
+    SYMBOLE (271)
+    TYPE (272)
+    AFFECTATION (273) 9
+    SI (274) 14
+    FSI (275) 14
+    COMPARAISON (276) 15
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+    $accept (22)
+        à gauche: 0
+    prog (23)
+        à gauche: 1
+        à droite: 0
+    corps (24)
+        à gauche: 2 3
+        à droite: 1 2
+    expr (25)
+        à gauche: 4 5
+        à droite: 2 3 14
+    binst (26)
+        à gauche: 6 7
+        à droite: 4 7
+    DA (27)
+        à gauche: 8 9
+        à droite: 6 7
+    SECONDMEMBRE (28)
+        à gauche: 10 11
+        à droite: 9 11 15
+    TERME (29)
+        à gauche: 12 13
+        à droite: 10 11
+    binstsi (30)
+        à gauche: 14
+        à droite: 5
+    CONDITION (31)
+        à gauche: 15
+        à droite: 14
+
+
+État 0
+
+    0 $accept: . prog $end
+
+    DEBUTPROGRAMME  décalage et aller à l'état 1
+
+    prog  aller à l'état 2
+
+
+État 1
+
+    1 prog: DEBUTPROGRAMME . corps FINPROGRAMME
+
+    VARIABLE  décalage et aller à l'état 3
+    SI        décalage et aller à l'état 4
+
+    corps    aller à l'état 5
+    expr     aller à l'état 6
+    binst    aller à l'état 7
+    DA       aller à l'état 8
+    binstsi  aller à l'état 9
+
+
+État 2
+
+    0 $accept: prog . $end
+
+    $end  décalage et aller à l'état 10
+
+
+État 3
+
+    8 DA: VARIABLE .
+    9   | VARIABLE . AFFECTATION SECONDMEMBRE
+
+    AFFECTATION  décalage et aller à l'état 11
+
+    $défaut  réduction par utilisation de la règle 8 (DA)
+
+
+État 4
+
+   14 binstsi: SI . CONDITION ALORS expr FSI
+
+    NOMBRE    décalage et aller à l'état 12
+    VARIABLE  décalage et aller à l'état 13
+
+    SECONDMEMBRE  aller à l'état 14
+    TERME         aller à l'état 15
+    CONDITION     aller à l'état 16
+
+
+État 5
+
+    1 prog: DEBUTPROGRAMME corps . FINPROGRAMME
+
+    FINPROGRAMME  décalage et aller à l'état 17
+
+
+État 6
+
+    2 corps: expr . corps
+    3      | expr .
+
+    VARIABLE  décalage et aller à l'état 3
+    SI        décalage et aller à l'état 4
+
+    $défaut  réduction par utilisation de la règle 3 (corps)
+
+    corps    aller à l'état 18
+    expr     aller à l'état 6
+    binst    aller à l'état 7
+    DA       aller à l'état 8
+    binstsi  aller à l'état 9
+
+
+État 7
+
+    4 expr: binst .
+
+    $défaut  réduction par utilisation de la règle 4 (expr)
+
+
+État 8
+
+    6 binst: DA . SEPINSTR
+    7      | DA . SEPINSTR binst
+
+    SEPINSTR  décalage et aller à l'état 19
+
+
+État 9
+
+    5 expr: binstsi .
+
+    $défaut  réduction par utilisation de la règle 5 (expr)
+
+
+État 10
+
+    0 $accept: prog $end .
+
+    $défaut  accepter
+
+
+État 11
+
+    9 DA: VARIABLE AFFECTATION . SECONDMEMBRE
+
+    NOMBRE    décalage et aller à l'état 12
+    VARIABLE  décalage et aller à l'état 13
+
+    SECONDMEMBRE  aller à l'état 20
+    TERME         aller à l'état 15
+
+
+État 12
+
+   13 TERME: NOMBRE .
+
+    $défaut  réduction par utilisation de la règle 13 (TERME)
+
+
+État 13
+
+   12 TERME: VARIABLE .
+
+    $défaut  réduction par utilisation de la règle 12 (TERME)
+
+
+État 14
+
+   15 CONDITION: SECONDMEMBRE . COMPARAISON SECONDMEMBRE
+
+    COMPARAISON  décalage et aller à l'état 21
+
+
+État 15
+
+   10 SECONDMEMBRE: TERME .
+   11             | TERME . OPERATEUR SECONDMEMBRE
+
+    OPERATEUR  décalage et aller à l'état 22
+
+    $défaut  réduction par utilisation de la règle 10 (SECONDMEMBRE)
+
+
+État 16
+
+   14 binstsi: SI CONDITION . ALORS expr FSI
+
+    ALORS  décalage et aller à l'état 23
+
+
+État 17
+
+    1 prog: DEBUTPROGRAMME corps FINPROGRAMME .
+
+    $défaut  réduction par utilisation de la règle 1 (prog)
+
+
+État 18
+
+    2 corps: expr corps .
+
+    $défaut  réduction par utilisation de la règle 2 (corps)
+
+
+État 19
+
+    6 binst: DA SEPINSTR .
+    7      | DA SEPINSTR . binst
+
+    VARIABLE  décalage et aller à l'état 3
+
+    VARIABLE  [réduction par utilisation de la règle 6 (binst)]
+    $défaut  réduction par utilisation de la règle 6 (binst)
+
+    binst  aller à l'état 24
+    DA     aller à l'état 8
+
+
+État 20
+
+    9 DA: VARIABLE AFFECTATION SECONDMEMBRE .
+
+    $défaut  réduction par utilisation de la règle 9 (DA)
+
+
+État 21
+
+   15 CONDITION: SECONDMEMBRE COMPARAISON . SECONDMEMBRE
+
+    NOMBRE    décalage et aller à l'état 12
+    VARIABLE  décalage et aller à l'état 13
+
+    SECONDMEMBRE  aller à l'état 25
+    TERME         aller à l'état 15
+
+
+État 22
+
+   11 SECONDMEMBRE: TERME OPERATEUR . SECONDMEMBRE
+
+    NOMBRE    décalage et aller à l'état 12
+    VARIABLE  décalage et aller à l'état 13
+
+    SECONDMEMBRE  aller à l'état 26
+    TERME         aller à l'état 15
+
+
+État 23
+
+   14 binstsi: SI CONDITION ALORS . expr FSI
+
+    VARIABLE  décalage et aller à l'état 3
+    SI        décalage et aller à l'état 4
+
+    expr     aller à l'état 27
+    binst    aller à l'état 7
+    DA       aller à l'état 8
+    binstsi  aller à l'état 9
+
+
+État 24
+
+    7 binst: DA SEPINSTR binst .
+
+    $défaut  réduction par utilisation de la règle 7 (binst)
+
+
+État 25
+
+   15 CONDITION: SECONDMEMBRE COMPARAISON SECONDMEMBRE .
+
+    $défaut  réduction par utilisation de la règle 15 (CONDITION)
+
+
+État 26
+
+   11 SECONDMEMBRE: TERME OPERATEUR SECONDMEMBRE .
+
+    $défaut  réduction par utilisation de la règle 11 (SECONDMEMBRE)
+
+
+État 27
+
+   14 binstsi: SI CONDITION ALORS expr . FSI
+
+    FSI  décalage et aller à l'état 28
+
+
+État 28
+
+   14 binstsi: SI CONDITION ALORS expr FSI .
+
+    $défaut  réduction par utilisation de la règle 14 (binstsi)

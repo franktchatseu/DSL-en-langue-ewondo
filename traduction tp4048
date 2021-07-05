@@ -1,0 +1,27 @@
+si
+sinon
+sinon si
+alors
+faire
+tant que
+entier/chiffre
+chaine
+retour/retouner/renvoyer
+lire 
+ecrire
+
+
+1- premiere etape
+ #nos lexemes
+ On distingue 5 types d’unit´es lexicales :
+— les symboles simples  (,)
+- symbole fin d'instruction ;
+- operateurs: +,-,*,/
+— les mots-clefs, dont :
+      — les instructions de controle (si, alors, retour,sinon,faire,sinon si,tant que . . . ),
+      — les types (entier),
+— les fonctions spéciales: lire et ecrire,
+— les noms de variables,
+— les noms de fonctions et
+— les nombres, uniquement entiers
+

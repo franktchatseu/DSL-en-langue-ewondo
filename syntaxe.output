@@ -1,0 +1,93 @@
+Terminaux inutilisés dans la grammaire
+
+    ENTIER
+    OPERATEUR
+    FAIRE
+    FAIT
+    ALORS
+    BOUCLE
+    COND
+
+
+Grammaire
+
+    0 $accept: prog $end
+
+    1 prog: programme
+
+    2 programme: %empty
+    3          | IDFONCTION VARIABLE
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+    $end (0) 0
+    error (256)
+    ENTIER (258)
+    OPERATEUR (259)
+    VARIABLE (260) 3
+    IDFONCTION (261) 3
+    FAIRE (262)
+    FAIT (263)
+    ALORS (264)
+    BOUCLE (265)
+    COND (266)
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+    $accept (12)
+        à gauche: 0
+    prog (13)
+        à gauche: 1
+        à droite: 0
+    programme (14)
+        à gauche: 2 3
+        à droite: 1
+
+
+État 0
+
+    0 $accept: . prog $end
+
+    IDFONCTION  décalage et aller à l'état 1
+
+    $défaut  réduction par utilisation de la règle 2 (programme)
+
+    prog       aller à l'état 2
+    programme  aller à l'état 3
+
+
+État 1
+
+    3 programme: IDFONCTION . VARIABLE
+
+    VARIABLE  décalage et aller à l'état 4
+
+
+État 2
+
+    0 $accept: prog . $end
+
+    $end  décalage et aller à l'état 5
+
+
+État 3
+
+    1 prog: programme .
+
+    $défaut  réduction par utilisation de la règle 1 (prog)
+
+
+État 4
+
+    3 programme: IDFONCTION VARIABLE .
+
+    $défaut  réduction par utilisation de la règle 3 (programme)
+
+
+État 5
+
+    0 $accept: prog $end .
+
+    $défaut  accepter
